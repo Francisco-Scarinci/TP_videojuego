@@ -22,6 +22,10 @@ public class PlayerPickup : MonoBehaviour
             Debug.Log ("Lápices recolectados: " + contador);
 
             Destroy (other.gameObject);
+        
+        if (contador == 6) {
+            Debug.Log ("Felicidades, terminaste el juego!");
+        }
         }
     }
 }

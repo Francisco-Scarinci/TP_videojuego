@@ -26,13 +26,12 @@ public class PlayerPickup : MonoBehaviour
         
         if (contador == 6) {
 
-            GameManager gameManager = FindAnyObjectByType <GameManager>();
-            gameManager.juegoTerminado = true;
+            InteractiveArea interactiveArea = FindAnyObjectByType <InteractiveArea>();
+            interactiveArea.juegoTerminado = true;
 
-            uiManager.scoreText.text = "";
             uiManager.timerText.text = "";
-            uiManager.GameOverText.color = Color.green;
-            uiManager.GameOverText.text = "¡Felicidades! ¡Terminaste!";
+            uiManager.MostrarPantallaWin();
+            Time.timeScale = 0;
         }
         }
     }

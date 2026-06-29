@@ -3,11 +3,12 @@ using UnityEngine;
 public class PlayerPickup : MonoBehaviour
 {
     private int contador = 0;
+    private UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        uiManager = FindAnyObjectByType <UIManager>();
     }
 
     // Update is called once per frame
@@ -19,12 +20,19 @@ public class PlayerPickup : MonoBehaviour
     private void OnTriggerEnter (Collider other) {
         if (other.CompareTag ("Pickable")) {
             contador ++;
-            Debug.Log ("Lápices recolectados: " + contador);
+            uiManager.UpdateScore (contador);
 
             Destroy (other.gameObject);
         
         if (contador == 6) {
-            Debug.Log ("Felicidades, terminaste el juego!");
+
+            GameManager gameManager = FindAnyObjectByType <GameManager>();
+            gameManager.juegoTerminado = true;
+
+            uiManager.scoreText.text = "";
+            uiManager.timerText.text = "";
+            uiManager.GameOverText.color = Color.green;
+            uiManager.GameOverText.text = "¡Felicidades! ¡Terminaste!";
         }
         }
     }
